@@ -183,7 +183,29 @@ print("Training Accuracy    :",xgb_train)
 print("Model Accuracy Score :",xgb_accuracy)
 cm_xgb = confusion_matrix(y_test, y_pred)
 cm_xgb
-
+#
+# simple fully connected nn
+#
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Activation, Dense
+from tensorflow.keras.optimizers import Adam
+clf_nn = Sequential([
+    Dense(units=16, input_shape = (9,), activation='relu'),
+    Dense(units=4,activation='relu'),
+    Dense(units=1,activation='sigmoid')
+])
+clf_nn.summary()
+clf_nn.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+clf_nn.fit(x=X_train, y=y_train, batch_size=10, epochs=10)
+_, nn_train = clf_nn.evaluate(X_train, y_train, verbose=0)
+nn_train = round(nn_train * 100, 2)
+_, nn_accuracy = clf_nn.evaluate(X_test, y_test, verbose=0)
+nn_accuracy = round(nn_accuracy * 100, 2)
+print("Training Accuracy    :",nn_train)
+print("Model Accuracy Score :",nn_accuracy)
+y_pred = clf_nn.predict(X_test, verbose=0).reshape((-1,)).round()
+cm_nn = confusion_matrix(y_test, y_pred)
+cm_nn
 #
 #plot confusion matrix if needed
 #
