@@ -69,10 +69,10 @@ display(X_train.head())
 display(X_test.head())
 
 
-from sklearn.metrics import accuracy_score
 #
 # Logistic Regression
 #
+from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 clf_logreg = LogisticRegression()
 clf_logreg.fit(X_train, y_train)
@@ -82,11 +82,13 @@ log_train = round(clf_logreg.score(X_train, y_train) * 100, 2)
 log_accuracy = round(accuracy_score(y_pred, y_test) * 100, 2)
 print("Training Accuracy    :",log_train)
 print("Model Accuracy Score :",log_accuracy)
+from sklearn.metrics import confusion_matrix
 cm_lr = confusion_matrix(y_test, y_pred)
 cm_lr
 #
 # svm
 #
+from sklearn.metrics import accuracy_score
 from sklearn import svm
 clf_svm = svm.SVC()
 clf_svm.fit(X_train, y_train)
@@ -96,6 +98,7 @@ svm_train = round(clf_svm.score(X_train, y_train) * 100, 2)
 svm_accuracy = round(accuracy_score(y_pred, y_test) * 100, 2)
 print("Training Accuracy    :",svm_train)
 print("Model Accuracy Score :",svm_accuracy)
+from sklearn.metrics import confusion_matrix
 cm_svm = confusion_matrix(y_test, y_pred)
 cm_svm
 #addition metrics
@@ -105,6 +108,7 @@ clf_svm.n_support_
 #
 # naive_bayes
 #
+from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import GaussianNB
 clf_nb = GaussianNB()
 clf_nb.fit(X_train, y_train)
@@ -113,11 +117,13 @@ nb_train = round(clf_nb.score(X_train, y_train) * 100, 2)
 nb_accuracy = round(accuracy_score(y_pred, y_test) * 100, 2)
 print("Training Accuracy    :",nb_train)
 print("Model Accuracy Score :",nb_accuracy)
+from sklearn.metrics import confusion_matrix
 cm_nb = confusion_matrix(y_test, y_pred)
 cm_nb
 #
 # knn
 #
+from sklearn.metrics import accuracy_score
 from sklearn.neighbors import NearestCentroid
 clf_knn = NearestCentroid()
 clf_knn.fit(X_train, y_train)
@@ -126,11 +132,13 @@ knn_train = round(clf_knn.score(X_train, y_train) * 100, 2)
 knn_accuracy = round(accuracy_score(y_pred, y_test) * 100, 2)
 print("Training Accuracy    :",knn_train)
 print("Model Accuracy Score :",knn_accuracy)
+from sklearn.metrics import confusion_matrix
 cm_knn = confusion_matrix(y_test, y_pred)
 cm_knn
 #
 # tree
 #
+from sklearn.metrics import accuracy_score
 from sklearn import tree
 clf_tree = tree.DecisionTreeClassifier()
 clf_tree.fit(X_train, y_train)
@@ -139,6 +147,7 @@ tree_train = round(clf_tree.score(X_train, y_train) * 100, 2)
 tree_accuracy = round(accuracy_score(y_pred, y_test) * 100, 2)
 print("Training Accuracy    :",tree_train)
 print("Model Accuracy Score :",tree_accuracy)
+from sklearn.metrics import confusion_matrix
 cm_tree = confusion_matrix(y_test, y_pred)
 cm_tree
 #addition metrics
@@ -146,6 +155,7 @@ tree.plot_tree(clf_tree)
 #
 # Gradient boosting tree
 #
+from sklearn.metrics import accuracy_score
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.datasets import make_hastie_10_2
 clf_GTB = HistGradientBoostingClassifier(min_samples_leaf=1)
@@ -155,11 +165,13 @@ GTB_train = round(clf_GTB.score(X_train, y_train) * 100, 2)
 GTB_accuracy = round(accuracy_score(y_pred, y_test) * 100, 2)
 print("Training Accuracy    :",GTB_train)
 print("Model Accuracy Score :",GTB_accuracy)
+from sklearn.metrics import confusion_matrix
 cm_gbt = confusion_matrix(y_test, y_pred)
 cm_gbt
 #
 # random forest
 #
+from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 clf_rf = RandomForestClassifier(n_estimators=10)
 clf_rf.fit(X_train, y_train)
@@ -168,11 +180,13 @@ rf_train = round(clf_rf.score(X_train, y_train) * 100, 2)
 rf_accuracy = round(accuracy_score(y_pred, y_test) * 100, 2)
 print("Training Accuracy    :",rf_train)
 print("Model Accuracy Score :",rf_accuracy)
+from sklearn.metrics import confusion_matrix
 cm_rf = confusion_matrix(y_test, y_pred)
 cm_rf
 #
 # xgboosting
 #
+from sklearn.metrics import accuracy_score
 from sklearn.ensemble import GradientBoostingClassifier
 clf_xgb = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0, max_depth=1, random_state=0)
 clf_xgb.fit(X_train, y_train)
@@ -181,6 +195,7 @@ xgb_train = round(clf_xgb.score(X_train, y_train) * 100, 2)
 xgb_accuracy = round(accuracy_score(y_pred, y_test) * 100, 2)
 print("Training Accuracy    :",xgb_train)
 print("Model Accuracy Score :",xgb_accuracy)
+from sklearn.metrics import confusion_matrix
 cm_xgb = confusion_matrix(y_test, y_pred)
 cm_xgb
 #
@@ -195,7 +210,7 @@ clf_nn = Sequential([
     Dense(units=1,activation='sigmoid')
 ])
 clf_nn.summary()
-clf_nn.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+clf_nn.compile(optimizer='Adam', loss='binary_crossentropy', metrics=['accuracy'])
 clf_nn.fit(x=X_train, y=y_train, batch_size=10, epochs=10)
 _, nn_train = clf_nn.evaluate(X_train, y_train, verbose=0)
 nn_train = round(nn_train * 100, 2)
@@ -204,6 +219,7 @@ nn_accuracy = round(nn_accuracy * 100, 2)
 print("Training Accuracy    :",nn_train)
 print("Model Accuracy Score :",nn_accuracy)
 y_pred = clf_nn.predict(X_test, verbose=0).reshape((-1,)).round()
+from sklearn.metrics import confusion_matrix
 cm_nn = confusion_matrix(y_test, y_pred)
 cm_nn
 #
