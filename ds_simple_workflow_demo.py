@@ -203,7 +203,7 @@ params = {
     "subsample": uniform(0.6, 0.4)
 }
 search = RandomizedSearchCV(clf_xgb, param_distributions=params, random_state=42, n_iter=200, cv=3, verbose=1, n_jobs=1, return_train_score=True)
-search.fit(X, y)
+search.fit(X_train, y_train)
 report = pd.DataFrame(search.cv_results_)
 report[report['rank_test_score'] == 1]
 
@@ -225,6 +225,7 @@ from tensorflow.keras.optimizers import Adam
 clf_nn = Sequential([
     Dense(units=16, input_shape = (9,), activation='relu'),
     Dense(units=4,activation='relu'),
+    Dense(units=2,activation='sigmoid')
     Dense(units=1,activation='sigmoid')
 ])
 clf_nn.summary()
